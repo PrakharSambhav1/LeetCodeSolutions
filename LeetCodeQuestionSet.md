@@ -1,65 +1,77 @@
-1. Two Sum
-   Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+# 1. Two Sum
+
+Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to target.
 
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
 You can return the answer in any order.
 
-Example 1:
+## Examples
 
+**Example 1:**
+
+```
 Input: nums = [2,7,11,15], target = 9
 Output: [0,1]
 Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
-Example 2:
+```
 
+**Example 2:**
+
+```
 Input: nums = [3,2,4], target = 6
 Output: [1,2]
-Example 3:
+```
 
+**Example 3:**
+
+```
 Input: nums = [3,3], target = 6
 Output: [0,1]
+```
 
-Constraints:
+## Constraints
 
-2 <= nums.length <= 104
--109 <= nums[i] <= 109
--109 <= target <= 109
-Only one valid answer exists.
+- `2 <= nums.length <= 10^4`
+- `-10^9 <= nums[i] <= 10^9`
+- `-10^9 <= target <= 10^9`
+- Only one valid answer exists.
 
-Soln:
+## Solutions
 
-    **O(n^2) Solution:**
+### O(n²) Solution - Brute Force
 
-````var twoSum = function(nums, target) {
- for(let i = 0; i <= nums.length - 2; i++){
-     for(let j = i+1; j<=nums.length-1; j++){
-         if((nums[i]+nums[j])==target){
-             return [i,j];
-         }
-     }
- }
+```javascript
+var twoSum = function (nums, target) {
+  for (let i = 0; i <= nums.length - 2; i++) {
+    for (let j = i + 1; j <= nums.length - 1; j++) {
+      if (nums[i] + nums[j] == target) {
+        return [i, j];
+      }
+    }
+  }
+};
+```
 
- };```
+### O(n) Solution - Hash Map Approach
 
- **O(n) Solution: Not self Created ::**
-``` var twoSum = function(nums, target) {
- const map = new Map();
+```javascript
+var twoSum = function (nums, target) {
+  const map = new Map();
 
- for(let i = 0; i < nums.length; i++){
-     const complement = target - nums[i];
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
 
-     if(map.has(complement)){
-         return [map.get(complement), i];
-     }
+    if (map.has(complement)) {
+      return [map.get(complement), i];
+    }
 
-     map.set(nums[i], i);
- }
+    map.set(nums[i], i);
+  }
+};
+```
 
-};```
-
-````
-
-## How it works:
+#### How it works:
 
 1. **Create a hash map** to store each number and its index
 2. **For each number**, calculate what value would sum with it to reach the target (the "complement")
@@ -68,23 +80,28 @@ Soln:
    - If no: store the current number and index in the map
 4. Continue until we find the answer
 
-## Example walkthrough:
+#### Example walkthrough:
 
-````
-
+```
 nums = [2, 7, 11, 15], target = 9
 
 i=0: num=2, complement=7, map={}, not found → add 2
 i=1: num=7, complement=2, map={2:0}, found! → return [0,1]
+```
 
-**O(n): (Maybe) Inspired :: Just checked Again O(n^2) :: Need to understand hashmap **
+### Alternative O(n²) Solution - Using indexOf
 
-```var twoSum = function(nums, target) {
-for(let i = 0; i <= nums.length - 1; i++){
-let complement = nums.indexOf(target - nums[i]);
-if(complement !== -1 && complement !== i){
-return [i, complement];
-}
-}
-};```
-````
+**Note:** This appears to be O(n) but is actually O(n²) because `indexOf` is O(n).
+
+```javascript
+var twoSum = function (nums, target) {
+  for (let i = 0; i <= nums.length - 1; i++) {
+    let complement = nums.indexOf(target - nums[i]);
+    if (complement !== -1 && complement !== i) {
+      return [i, complement];
+    }
+  }
+};
+```
+
+**Important:** While this looks cleaner, `indexOf()` has O(n) time complexity, making the overall solution O(n²). The hash map approach is preferred for optimal performance.
