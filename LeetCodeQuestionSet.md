@@ -28,35 +28,36 @@ Only one valid answer exists.
 
 Soln:
 
-    O(n^2) Solution:
-    var twoSum = function(nums, target) {
-    for(let i = 0; i <= nums.length - 2; i++){
-        for(let j = i+1; j<=nums.length-1; j++){
-            if((nums[i]+nums[j])==target){
-                return [i,j];
-            }
-        }
-    }
+    **O(n^2) Solution:**
 
-    };
+````var twoSum = function(nums, target) {
+ for(let i = 0; i <= nums.length - 2; i++){
+     for(let j = i+1; j<=nums.length-1; j++){
+         if((nums[i]+nums[j])==target){
+             return [i,j];
+         }
+     }
+ }
 
-    O(n) Solution: Not self Created ::
-    var twoSum = function(nums, target) {
-    const map = new Map();
+ };```
 
-    for(let i = 0; i < nums.length; i++){
-        const complement = target - nums[i];
+ **O(n) Solution: Not self Created ::**
+``` var twoSum = function(nums, target) {
+ const map = new Map();
 
-        if(map.has(complement)){
-            return [map.get(complement), i];
-        }
+ for(let i = 0; i < nums.length; i++){
+     const complement = target - nums[i];
 
-        map.set(nums[i], i);
-    }
+     if(map.has(complement)){
+         return [map.get(complement), i];
+     }
 
-};
+     map.set(nums[i], i);
+ }
 
-```
+};```
+
+````
 
 ## How it works:
 
@@ -68,20 +69,22 @@ Soln:
 4. Continue until we find the answer
 
 ## Example walkthrough:
-```
+
+````
 
 nums = [2, 7, 11, 15], target = 9
 
 i=0: num=2, complement=7, map={}, not found → add 2
 i=1: num=7, complement=2, map={2:0}, found! → return [0,1]
 
-O(n): (Maybe) Inspired :: Just checked Again O(n^2) :: Need to understand hashmap
+**O(n): (Maybe) Inspired :: Just checked Again O(n^2) :: Need to understand hashmap **
 
-var twoSum = function(nums, target) {
+```var twoSum = function(nums, target) {
 for(let i = 0; i <= nums.length - 1; i++){
 let complement = nums.indexOf(target - nums[i]);
 if(complement !== -1 && complement !== i){
 return [i, complement];
 }
 }
-};
+};```
+````
